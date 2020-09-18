@@ -1,0 +1,32 @@
+<tbody>
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td><%=image_tag tweet.user.image_url, class: "images_avatar rounded-circle border border-info " %></td>  
+        <td><%= tweet.user.name %></td>
+        <td><%= link_to time_ago_in_words(tweet.created_at) , tweet%></td> 
+        <td><% @content=tweet.content %>
+            <% @content=@content.split(" ") %>
+            <% @newcontent=@content.each do |item| %>
+              <% if item.include?("#") %>
+                <%=item=link_to item, search_path(search: item.gsub('#','')) %>
+              <% else %>
+                <%=item%> 
+              <% end %>
+            <% end %>
+        </td>
+        <td><%= link_to 'Ver', tweet %></td>
+        <td><%= link_to 'Editar', edit_tweet_path(tweet) %></td>
+        <td><%= link_to 'Eliminar', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <td>
+          <%=tweet.likes_count%>
+          <%= link_to 'like', likes_path(tweet.id), method: :post, class: "fas fa-heart"%>
+        </td>
+
+        <td>
+          <%=tweet.retweets_count%>
+          <%= link_to 'retweet', retweets_path(tweet.id), method: :post, class: "fas fa-retweet"%> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>

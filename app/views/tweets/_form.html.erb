@@ -1,0 +1,14 @@
+<%= form_with(model: tweet, local: true) do |form| %>
+  
+  <div class="field">
+    <%= form.label :content, "#{current_user.name} dice:" %>
+    <%= form.text_area :content, id: :tweet_content, :class => "form-control" %>
+  </div>
+
+  <%= form.hidden_field :user_id, :value => current_user.id %> 
+  
+  <div class="actions text-right my-2">
+    <%= form.submit "Guardar", :class => " btn btn-primary" %>
+  </div>
+
+<% end %>

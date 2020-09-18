@@ -1,0 +1,27 @@
+<div class= "row">
+  <div class= "col-12  shadow-lg rounded  p-1 mt-3 card">
+    <div class="row">
+              
+      <div class="col-9 "> 
+        <span class="username"><%= @tweet.user.name%> dice: </span></br/>   
+        <span><%=link_to '<i class="far fa-calendar-alt"></i>'.html_safe+distance_of_time_in_words(Time.now, @tweet.created_at), @tweet%></span></br/>
+        <%= @tweet.content%>
+      </div>
+
+      <div class= "col-12">
+
+        <% @likes.each do |like| %>
+          <% if @tweet.id==like.tweet_id %>
+
+            <%=image_tag like.user.image_url, class: "images_avatar rounded-circle border border-info " %>
+
+          <% end %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%= link_to 'Back', tweets_path %>
